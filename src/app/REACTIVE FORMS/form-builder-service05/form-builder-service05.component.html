@@ -1,0 +1,84 @@
+<h1>Registration Form</h1>
+<form [formGroup]="registrationForm">
+  {{ registrationForm.value | json }}
+  <div class="form-group">
+    <label for="userName">Username</label>
+    <!--    Apply the is-invalid bootstrap class to ds input if its touched and invalid.. We retrieve the specific formControl from the class using 'userName-->
+    <input
+      id="userName"
+      formControlName="userName"
+      type="text"
+      class="form-control"
+      [class.is-invalid]="userName.invalid && userName.touched"
+    />
+    <!--    Hide ds error msg if the form is untouched or if its valid-->
+    <!--    <small
+      class="text-danger"
+      [class.d-none]="
+        userName.untouched ||
+        userName.valid
+      "
+      >UserName is required</small
+    >-->
+
+    <!--    Display different validations for different scenarios if the form field is touched and invalid-->
+    <div *ngIf="userName.touched && userName.invalid">
+      <!--      display ds error if the required error is detected-->
+      <small class="text-danger" *ngIf="userName.errors?.required"
+        >Username is required!</small
+      >
+      <!--      display ds error if the minLength error is detected-->
+      <small class="text-danger" *ngIf="userName.errors?.minlength"
+        >Username must be at least 3 characters!</small
+      >
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input
+      id="password"
+      formControlName="password"
+      type="password"
+      class="form-control"
+    />
+  </div>
+  <div class="form-group">
+    <label for="confirmPassword">Confirm Password</label>
+    <input
+      id="confirmPassword"
+      formControlName="confirmPassword"
+      type="password"
+      class="form-control"
+    />
+  </div>
+  <div formGroupName="address">
+    <div class="form-group">
+      <label for="city">City</label>
+      <input
+        id="city"
+        formControlName="city"
+        type="text"
+        class="form-control"
+      />
+    </div>
+    <div class="form-group">
+      <label for="state">State</label>
+      <input
+        id="state"
+        formControlName="state"
+        type="text"
+        class="form-control"
+      />
+    </div>
+    <div class="form-group">
+      <label for="postal">Postal Code</label>
+      <input
+        id="postal"
+        formControlName="postalCode"
+        type="text"
+        class="form-control"
+      />
+    </div>
+  </div>
+  <button class="btn btn-success" type="submit">Register</button>
+</form>

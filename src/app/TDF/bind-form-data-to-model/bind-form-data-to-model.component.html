@@ -1,0 +1,97 @@
+<div class="container-fluid py-5">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <h1 class="text-center">Bootcamp Enrollment Form</h1>
+      <form>
+        <!--        here we print our values of our model as json-->
+        <!--        on each input field, we bind to a property of our model and this fill the form with the respective values of the model which will now get updated as we update the fields-->
+        {{ userModel | json }}
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="name"
+            placeholder="Your Name"
+            [(ngModel)]="userModel.name"
+            name="userName"
+          />
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            placeholder="Your Email"
+            [(ngModel)]="userModel.email"
+            name="email"
+          />
+        </div>
+        <div class="form-group">
+          <label for="telephone">Phone Number</label>
+          <input
+            type="tel"
+            class="form-control"
+            id="telephone"
+            placeholder="Your Email"
+            [(ngModel)]="userModel.phone"
+            name="phone"
+          />
+        </div>
+        <div class="form-group">
+          <label for="option">I am interested in</label>
+          <select
+            class="custom-select"
+            [(ngModel)]="userModel.topic"
+            name="topic"
+          >
+            <option *ngFor="let topic of topics" id="option">
+              {{ topic }}
+            </option>
+          </select>
+        </div>
+        <p>Time Preference</p>
+        <div class="custom-control custom-radio">
+          <input
+            type="radio"
+            id="customRadio1"
+            name="timePreference"
+            class="custom-control-input"
+            value="morning"
+            [(ngModel)]="userModel.timePreference"
+          />
+          <label class="custom-control-label" for="customRadio1"
+            >Morning (9AM - 12PM)</label
+          >
+        </div>
+        <div class="custom-control custom-radio mb-3">
+          <input
+            type="radio"
+            id="customRadio2"
+            name="timePreference"
+            class="custom-control-input"
+            value="evening"
+            [(ngModel)]="userModel.timePreference"
+          />
+          <label class="custom-control-label" for="customRadio2"
+            >Evening (5PM - 8PM)</label
+          >
+        </div>
+        <div class="custom-control custom-checkbox mb-3">
+          <input
+            type="checkbox"
+            class="custom-control-input"
+            id="customCheck1"
+            [(ngModel)]="userModel.subscribe"
+            name="subscribe"
+          />
+          <label class="custom-control-label" for="customCheck1"
+            >Subscribe to newsletter</label
+          >
+        </div>
+        <button class="btn btn-primary" type="submit">Submit form</button>
+      </form>
+    </div>
+  </div>
+</div>

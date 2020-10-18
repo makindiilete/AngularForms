@@ -1,0 +1,131 @@
+<div class="container-fluid py-5">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <h1 class="text-center">Bootcamp Enrollment Form</h1>
+      <form>
+        <div class="form-group">
+          <label for="name">Name</label>
+
+          <input
+            #name="ngModel"
+            required
+            type="text"
+            class="form-control"
+            id="name"
+            placeholder="Your Name"
+            [(ngModel)]="userModel.name"
+            [class.is-invalid]="name.touched && name.invalid"
+            name="userName"
+          />
+          <p
+            [class.d-none]="name.untouched && name.valid"
+            class="alert alert-danger mt-3"
+          >
+            Name is required
+          </p>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            #email="ngModel"
+            class="form-control"
+            id="email"
+            placeholder="Your Email"
+            [(ngModel)]="userModel.email"
+            name="email"
+          />
+        </div>
+        <div class="form-group">
+          <label for="telephone">Phone Number</label>
+          <input
+            #phone="ngModel"
+            required
+            pattern="^\d{10}$"
+            [class.is-invalid]="phone.touched && phone.invalid"
+            type="tel"
+            class="form-control"
+            id="telephone"
+            placeholder="Your Email"
+            [(ngModel)]="userModel.phone"
+            name="phone"
+          />
+          <div *ngIf="phone.errors && (phone.invalid || phone.touched)">
+            <small class="text-danger" *ngIf="phone.errors.required"
+              >Phone number is required</small
+            >
+            <small class="text-danger" *ngIf="phone.errors.pattern"
+              >Phone number must be 10digits</small
+            >
+          </div>
+        </div>
+        <!--SELECT DROPDOWN VALIDATION-->
+        <div class="form-group">
+          <label for="option">I am interested in</label>
+          <!--          Attach bootstrap error class if the form is touched and the topicHasError field is set to true-->
+          <select
+            #topic="ngModel"
+            (blur)="validateTopic(topic.value)"
+            (click)="validateTopic(topic.value)"
+            [class.is-invalid]="topic.touched && topicHasError"
+            class="custom-select"
+            [(ngModel)]="userModel.topic"
+            name="topic"
+          >
+            <option value="default">I am interested in</option>
+            <option *ngFor="let topic of topics" id="option">
+              {{ topic }}
+            </option>
+          </select>
+          <!--          DONT SHOW THIS ALERT IF THE topicHasError property defined in the class is set false or the select option is valid-->
+          <small
+            [class.d-none]="!topicHasError || topic.untouched"
+            class="text-danger"
+            >Please select an option</small
+          >
+        </div>
+        <p>Time Preference</p>
+        <div class="custom-control custom-radio">
+          <input
+            type="radio"
+            id="customRadio1"
+            name="timePreference"
+            class="custom-control-input"
+            value="morning"
+            [(ngModel)]="userModel.timePreference"
+          />
+          <label class="custom-control-label" for="customRadio1"
+            >Morning (9AM - 12PM)</label
+          >
+        </div>
+        <div class="custom-control custom-radio mb-3">
+          <input
+            type="radio"
+            id="customRadio2"
+            name="timePreference"
+            class="custom-control-input"
+            value="evening"
+            [(ngModel)]="userModel.timePreference"
+          />
+          <label class="custom-control-label" for="customRadio2"
+            >Evening (5PM - 8PM)</label
+          >
+        </div>
+        <div class="custom-control custom-checkbox mb-3">
+          <input
+            #subscribe="ngModel"
+            type="checkbox"
+            class="custom-control-input"
+            id="customCheck1"
+            [(ngModel)]="userModel.subscribe"
+            name="subscribe"
+          />
+          <label class="custom-control-label" for="customCheck1"
+            >Subscribe to newsletter</label
+          >
+        </div>
+        <button class="btn btn-primary" type="submit">Submit form</button>
+      </form>
+    </div>
+  </div>
+</div>

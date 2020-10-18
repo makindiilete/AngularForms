@@ -1,0 +1,112 @@
+<div class="container-fluid py-5">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <h1 class="text-center">Bootcamp Enrollment Form</h1>
+      <form>
+        <div class="form-group">
+          <label for="name">Name</label>
+          <!--          Apply a template var to an input field-->
+          <input
+            #name
+            required
+            type="text"
+            class="form-control"
+            id="name"
+            placeholder="Your Name"
+            [(ngModel)]="userModel.name"
+            name="userName"
+          />
+          <!--          And here we can print our all the class name inside it.. ds will reveal to us under the hood those tracking state className angular added (ngTouched, ngDirty etc)-->
+          {{ name.className }}
+          <!--          ds prints : - form-control ng-untouched ng-pristine ng-valid -->
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <!--          bind the template var of ds input to its ngModel dir so we can access the value of its state inside d view-->
+          <input
+            type="email"
+            #email="ngModel"
+            class="form-control"
+            id="email"
+            placeholder="Your Email"
+            [(ngModel)]="userModel.email"
+            name="email"
+          />
+          <!--          Accessing and using the touched state of the email field-->
+          <!--          so now we can render a boolean value in the browser if the email field has been touched-->
+          {{ email.touched }}
+          <!--          ds prints 'true' in the browser when the field is touched-->
+        </div>
+        <div class="form-group">
+          <label for="telephone">Phone Number</label>
+          <input
+            #phone="ngModel"
+            type="tel"
+            class="form-control"
+            id="telephone"
+            placeholder="Your Email"
+            [(ngModel)]="userModel.phone"
+            name="phone"
+          />
+          <!--          Accessing and using the pristine state (if the field value has been changed) of the phone field -->
+          {{ phone.pristine }}
+        </div>
+        <div class="form-group">
+          <label for="option">I am interested in</label>
+          <select
+            class="custom-select"
+            [(ngModel)]="userModel.topic"
+            name="topic"
+          >
+            <option *ngFor="let topic of topics" id="option">
+              {{ topic }}
+            </option>
+          </select>
+        </div>
+        <p>Time Preference</p>
+        <div class="custom-control custom-radio">
+          <input
+            type="radio"
+            id="customRadio1"
+            name="timePreference"
+            class="custom-control-input"
+            value="morning"
+            [(ngModel)]="userModel.timePreference"
+          />
+          <label class="custom-control-label" for="customRadio1"
+            >Morning (9AM - 12PM)</label
+          >
+        </div>
+        <div class="custom-control custom-radio mb-3">
+          <input
+            type="radio"
+            id="customRadio2"
+            name="timePreference"
+            class="custom-control-input"
+            value="evening"
+            [(ngModel)]="userModel.timePreference"
+          />
+          <label class="custom-control-label" for="customRadio2"
+            >Evening (5PM - 8PM)</label
+          >
+        </div>
+        <div class="custom-control custom-checkbox mb-3">
+          <input
+            #subscribe="ngModel"
+            type="checkbox"
+            class="custom-control-input"
+            id="customCheck1"
+            [(ngModel)]="userModel.subscribe"
+            name="subscribe"
+          />
+          <!--          Accessing the validity state of th subscription field-->
+          {{ subscribe.valid }}
+          <label class="custom-control-label" for="customCheck1"
+            >Subscribe to newsletter</label
+          >
+        </div>
+        <button class="btn btn-primary" type="submit">Submit form</button>
+      </form>
+    </div>
+  </div>
+</div>

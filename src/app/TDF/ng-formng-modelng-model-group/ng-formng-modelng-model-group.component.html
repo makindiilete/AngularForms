@@ -1,0 +1,143 @@
+<div class="container-fluid py-5">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <h1 class="text-center">Bootcamp Enrollment Form</h1>
+      <!--      ngModel directive-->
+      <!--      ngForm gives us access to all valuable info of each controls of ds form e.g. d input value-->
+      <form #userForm="ngForm">
+        <!--        now we can make use of d variable #userForm to extract all values of all fields here and we convert dt to json with "|json"-->
+        <!--        ngForm wil only track input fields dt r having the 'ngModel' and 'name' attribute in their tag.. its d 'name' attribute dt ngForm will use to track each field-->
+        {{ userForm.value | json }}
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="name"
+            placeholder="Your Name"
+            ngModel
+            name="userName"
+          />
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            placeholder="Your Email"
+            ngModel
+            name="email"
+          />
+        </div>
+        <div class="form-group">
+          <label for="telephone">Phone Number</label>
+          <input
+            type="tel"
+            class="form-control"
+            id="telephone"
+            placeholder="Your Email"
+            ngModel
+            name="phone"
+          />
+        </div>
+        <div class="form-group">
+          <label for="option">I am interested in</label>
+          <select class="custom-select" ngModel name="topic">
+            <option *ngFor="let topic of topics" id="option">
+              {{ topic }}
+            </option>
+          </select>
+        </div>
+        <p>Time Preference</p>
+        <div class="custom-control custom-radio">
+          <input
+            type="radio"
+            id="customRadio1"
+            name="timePreference"
+            class="custom-control-input"
+            value="morning"
+            ngModel
+          />
+          <label class="custom-control-label" for="customRadio1"
+            >Morning (9AM - 12PM)</label
+          >
+        </div>
+        <div class="custom-control custom-radio mb-3">
+          <input
+            type="radio"
+            id="customRadio2"
+            name="timePreference"
+            class="custom-control-input"
+            value="evening"
+            ngModel
+          />
+          <label class="custom-control-label" for="customRadio2"
+            >Evening (5PM - 8PM)</label
+          >
+        </div>
+        <div class="custom-control custom-checkbox mb-3">
+          <input
+            type="checkbox"
+            class="custom-control-input"
+            id="customCheck1"
+            ngModel
+            name="subscribe"
+          />
+          <label class="custom-control-label" for="customCheck1"
+            >Subscribe to newsletter</label
+          >
+        </div>
+        <!--        ngModelGroup directive to group the values of user location under one group-->
+        <!--        angular will create a property with the name 'address' and every input fields inside ds div tag will be group inside dt property-->
+        <div ngModelGroup="address">
+          <div class="form-group">
+            <label for="street">Street</label>
+            <input
+              type="text"
+              class="form-control"
+              id="street"
+              placeholder="Street"
+              ngModel
+              name="street"
+            />
+          </div>
+          <div class="form-group">
+            <label for="city">City</label>
+            <input
+              type="text"
+              class="form-control"
+              id="city"
+              placeholder="City"
+              ngModel
+              name="city"
+            />
+          </div>
+          <div class="form-group">
+            <label for="state">State</label>
+            <input
+              type="text"
+              class="form-control"
+              id="state"
+              placeholder="State"
+              ngModel
+              name="state"
+            />
+          </div>
+          <div class="form-group">
+            <label for="postal">Postal Code</label>
+            <input
+              type="text"
+              class="form-control"
+              id="postal"
+              placeholder="Postal Code"
+              ngModel
+              name="postal"
+            />
+          </div>
+        </div>
+        <button class="btn btn-primary" type="submit">Submit form</button>
+      </form>
+    </div>
+  </div>
+</div>

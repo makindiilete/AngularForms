@@ -1,0 +1,121 @@
+<div class="container-fluid py-5">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <h1 class="text-center">Bootcamp Enrollment Form</h1>
+      <form>
+        <div class="form-group">
+          <label for="name">Name</label>
+
+          <input
+            #name="ngModel"
+            required
+            type="text"
+            class="form-control"
+            id="name"
+            placeholder="Your Name"
+            [(ngModel)]="userModel.name"
+            [class.is-invalid]="name.touched && name.invalid"
+            name="userName"
+          />
+          <!--          Using bootstrap d-none class, we say we should hide ds field is d field has not bin touched and valid so it will show oly when d field is touched and invalid-->
+          <p
+            [class.d-none]="name.untouched && name.valid"
+            class="alert alert-danger mt-3"
+          >
+            Name is required
+          </p>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            #email="ngModel"
+            class="form-control"
+            id="email"
+            placeholder="Your Email"
+            [(ngModel)]="userModel.email"
+            name="email"
+          />
+        </div>
+        <div class="form-group">
+          <label for="telephone">Phone Number</label>
+          <input
+            #phone="ngModel"
+            required
+            pattern="^\d{10}$"
+            [class.is-invalid]="phone.touched && phone.invalid"
+            type="tel"
+            class="form-control"
+            id="telephone"
+            placeholder="Your Email"
+            [(ngModel)]="userModel.phone"
+            name="phone"
+          />
+          <!--          Ds div will be rendered if there is an error on the input-->
+          <div *ngIf="phone.errors && (phone.invalid || phone.touched)">
+            <!--            we render any of ds tags depending on the specific error dt occurs-->
+            <small class="text-danger" *ngIf="phone.errors.required"
+              >Phone number is required</small
+            >
+            <small class="text-danger" *ngIf="phone.errors.pattern"
+              >Phone number must be 10digits</small
+            >
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="option">I am interested in</label>
+          <select
+            class="custom-select"
+            [(ngModel)]="userModel.topic"
+            name="topic"
+          >
+            <option *ngFor="let topic of topics" id="option">
+              {{ topic }}
+            </option>
+          </select>
+        </div>
+        <p>Time Preference</p>
+        <div class="custom-control custom-radio">
+          <input
+            type="radio"
+            id="customRadio1"
+            name="timePreference"
+            class="custom-control-input"
+            value="morning"
+            [(ngModel)]="userModel.timePreference"
+          />
+          <label class="custom-control-label" for="customRadio1"
+            >Morning (9AM - 12PM)</label
+          >
+        </div>
+        <div class="custom-control custom-radio mb-3">
+          <input
+            type="radio"
+            id="customRadio2"
+            name="timePreference"
+            class="custom-control-input"
+            value="evening"
+            [(ngModel)]="userModel.timePreference"
+          />
+          <label class="custom-control-label" for="customRadio2"
+            >Evening (5PM - 8PM)</label
+          >
+        </div>
+        <div class="custom-control custom-checkbox mb-3">
+          <input
+            #subscribe="ngModel"
+            type="checkbox"
+            class="custom-control-input"
+            id="customCheck1"
+            [(ngModel)]="userModel.subscribe"
+            name="subscribe"
+          />
+          <label class="custom-control-label" for="customCheck1"
+            >Subscribe to newsletter</label
+          >
+        </div>
+        <button class="btn btn-primary" type="submit">Submit form</button>
+      </form>
+    </div>
+  </div>
+</div>
